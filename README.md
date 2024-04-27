@@ -1,10 +1,6 @@
 <p align="center"> Hi! I'm nagotta.</p>
 
 <p align="center"> 
-  <img alt="Trophy" height="120px" src="https://github-profile-trophy.vercel.app/?username=nagotta&theme=nord&column=10" />
-</p>
-
-<p align="center"> 
   <img alt="profile-details" height="200px" width= "1000px" src="https://github.com/nagotta/nagotta.github.io/blob/main/profile-summary-card-output/default/0-profile-details.svg" />
 </p>
 
@@ -16,4 +12,8 @@
 <p align="center"> 
   <img alt="stats" height="200px" width=match-parent src="https://github.com/nagotta/nagotta.github.io/blob/main/profile-summary-card-output/default/3-stats.svg" />
   <img alt="productive-time" height="200px" width=match-parent src="https://github.com/nagotta/nagotta.github.io/blob/main/profile-summary-card-output/default/4-productive-time.svg" />
+</p>
+
+<p align="center"> 
+  <img alt="Trophy" height="120px" src="https://github-profile-trophy.vercel.app/?username=nagotta&theme=nord&column=10" />
 </p>
