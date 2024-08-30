@@ -9,8 +9,13 @@
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             padding: 20px;
-            max-width: 600px;
+            max-width: 800px;
             margin: auto;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2列に設定 */
+            gap: 20px; /* 動画間のスペース */
         }
         .video-container {
             position: relative;
@@ -19,7 +24,6 @@
             overflow: hidden;
             max-width: 100%;
             background: #000;
-            margin-bottom: 40px; /* 動画間のスペース */
         }
         .video-container iframe {
             position: absolute;
@@ -34,17 +38,19 @@
 <body>
     <h1>YouTube Videos</h1>
     
-    <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/Uurcsc99GhU?si=pITKKIaCt8VLQl2y"" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
-    <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/aXAsMcmtJTc?si=S_n7lKZFuqIfXSxe" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
-    <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/ydYDqZQpim8?si=0GO7206IrZY2RxWM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
-    <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/creq_1I-llE?si=ThphSdp5_wrG-Tqk" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <div class="grid-container">
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/Uurcsc99GhU?si=pITKKIaCt8VLQl2y" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/aXAsMcmtJTc?si=S_n7lKZFuqIfXSxe" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/ydYDqZQpim8?si=0GO7206IrZY2RxWM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/creq_1I-llE?si=ThphSdp5_wrG-Tqk" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
     </div>
 
 </body>
