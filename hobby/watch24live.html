@@ -199,6 +199,9 @@
         <div class="video-container">
             <iframe src="https://www.youtube.com/embed/XwLug9jR7lA" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/Nw4HLGxuQ8s" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
     </div>
     
     <!-- TVモード -->
@@ -225,10 +228,13 @@
             "https://www.youtube.com/embed/2lM0STRJQtc?autoplay=1",
             "https://www.youtube.com/embed/lsxYH2XQQCg?autoplay=1",
             "https://www.youtube.com/embed/3szkFHfr6sA?autoplay=1",
-            "https://www.youtube.com/embed/XwLug9jR7lA?autoplay=1"
+            "https://www.youtube.com/embed/XwLug9jR7lA?autoplay=1",
+            "https://www.youtube.com/embed/Nw4HLGxuQ8s?autoplay=1"
         ];
         
         let currentChannel = 0;
+        let numberBuffer = '';
+        let numberInputTimer = null;
         
         function switchMode(mode) {
             const gridMode = document.getElementById('gridMode');
@@ -273,15 +279,33 @@
             if (document.getElementById('tvMode').classList.contains('active')) {
                 if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
                     nextChannel();
+                    // 数字入力をクリア
+                    numberBuffer = '';
+                    if (numberInputTimer) clearTimeout(numberInputTimer);
                 } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
                     prevChannel();
-                } else if (e.key >= '1' && e.key <= '9') {
-                    // 数字キー1-9でチャンネル切り替え
-                    const channelNum = parseInt(e.key) - 1;
-                    if (channelNum < channels.length) {
-                        currentChannel = channelNum;
-                        updateChannel();
-                    }
+                    // 数字入力をクリア
+                    numberBuffer = '';
+                    if (numberInputTimer) clearTimeout(numberInputTimer);
+                } else if (e.key >= '0' && e.key <= '9') {
+                    // 数字キー入力を連続で受け付ける
+                    numberBuffer += e.key;
+                    
+                    // 既存のタイマーをクリア
+                    if (numberInputTimer) clearTimeout(numberInputTimer);
+                    
+                    // 1秒後に入力を確定してチャンネル変更
+                    numberInputTimer = setTimeout(function() {
+                        const channelNum = parseInt(numberBuffer) - 1;
+                        if (channelNum >= 0 && channelNum < channels.length) {
+                            currentChannel = channelNum;
+                            updateChannel();
+                        }
+                        numberBuffer = '';
+                    }, 1000);
+                    
+                    // チャンネル番号表示を更新（入力中の番号を表示）
+                    document.getElementById('channelNumber').textContent = numberBuffer;
                 }
             }
         });
