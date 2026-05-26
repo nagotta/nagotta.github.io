@@ -1,54 +1,279 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Videos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            padding: 20px;
-            max-width: 600px;
-            margin: auto;
-        }
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 アスペクト比 */
-            height: 0;
-            overflow: hidden;
-            max-width: 100%;
-            background: #000;
-            margin-bottom: 40px; /* 動画間のスペース */
-        }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>永田歩 | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lato', 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      background: #f7f7f5;
+      color: #222;
+      line-height: 1.75;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-title {
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: #111;
+    }
+
+    .site-nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .site-nav a {
+      text-decoration: none;
+      color: #666;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .site-nav a:hover { color: #1a6aaf; }
+
+    /* ── Main ── */
+    .site-main {
+      max-width: 860px;
+      margin: 2.5rem auto 5rem;
+      padding: 0 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 2rem 2.5rem;
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: #1a6aaf;
+      border-bottom: 1px solid #e8e8e8;
+      padding-bottom: 0.6rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .card h3 {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #1a6aaf;
+      margin: 2.2rem 0 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .card h3:first-of-type { margin-top: 0; }
+
+    /* ── Profile dl ── */
+    dl {
+      display: grid;
+      grid-template-columns: 6rem 1fr;
+      gap: 0.5rem 1.5rem;
+      font-size: 0.92rem;
+    }
+
+    dt {
+      color: #999;
+      font-size: 0.82rem;
+      padding-top: 0.1rem;
+    }
+
+    dd a {
+      color: #1a6aaf;
+      text-decoration: none;
+    }
+
+    dd a:hover { text-decoration: underline; }
+
+    /* ── Paper list ── */
+    .paper-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .paper-list li {
+      padding: 1rem 1.25rem;
+      background: #fafaf8;
+      border-left: 3px solid #c0d8f0;
+      font-size: 0.92rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .paper-list li:hover {
+      border-left-color: #1a6aaf;
+      background: #f3f7fc;
+    }
+
+    .paper-list a {
+      color: #1a1a1a;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.3rem;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    .paper-list a:hover { color: #1a6aaf; }
+
+    .paper-list span:first-child {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 400;
+      color: #1a1a1a;
+      line-height: 1.6;
+      margin-bottom: 0.3rem;
+    }
+
+    .meta {
+      display: block;
+      font-size: 0.8rem;
+      color: #999;
+      line-height: 1.5;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 0.15rem 0.55rem;
+      border-radius: 2px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+      background: #eaf2fb;
+      color: #1a6aaf;
+      border: 1px solid #c0d8f0;
+    }
+
+    .badge.award {
+      background: #fff8e6;
+      color: #9a6800;
+      border-color: #f0d060;
+      font-weight: 700;
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.75rem;
+      color: #bbb;
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 560px) {
+      dl { grid-template-columns: 1fr; gap: 0.1rem; }
+      dt { color: #bbb; font-size: 0.75rem; }
+      .inner { padding: 0 1rem; }
+      .site-main { padding: 0 1rem; }
+      .card { padding: 1.5rem 1.25rem; }
+    }
+  </style>
 </head>
 <body>
-    <h1>YouTube Videos</h1>
-    
-    <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/Uurcsc99GhU?si=pITKKIaCt8VLQl2y"" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
-    
-    <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/aXAsMcmtJTc?si=S_n7lKZFuqIfXSxe" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
 
-    <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/ydYDqZQpim8?si=0GO7206IrZY2RxWM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <header class="site-header">
+    <div class="inner">
+      <h1 class="site-title">永田 歩</h1>
+      <nav class="site-nav">
+        <a href="#profile">Profile</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/creq_1I-llE?si=ThphSdp5_wrG-Tqk" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
+  <main class="site-main">
+
+    <section id="profile" class="card">
+      <h2>Profile</h2>
+      <dl>
+        <dt>所属</dt><dd>香川大学大学院 創発科学研究科</dd>
+        <dt>学年</dt><dd>修士1年</dd>
+        <dt>研究室</dt><dd>安藤研究室</dd>
+        <dt>専門</dt><dd>自然言語処理</dd>
+      </dl>
+    </section>
+
+    <section id="achievements" class="card">
+      <h2>Achievements</h2>
+
+      <h3>学会発表</h3>
+      <ul class="paper-list">
+        <li>
+          <span>FIT（情報科学技術フォーラム）<span class="badge">発表予定</span></span>
+          <span class="meta">2026年9月 ／ アブストラクト提出済み</span>
+        </li>
+        <li>
+          <span>言語処理学会 第32回年次大会 ポスター発表</span>
+          <span class="meta">2026年3月</span>
+        </li>
+        <li>
+          <span>電気・電子・情報関係学会 四国支部連合大会 論文発表<span class="badge award">優秀発表賞</span></span>
+          <span class="meta">2024年9月</span>
+        </li>
+      </ul>
+
+      <h3>資格</h3>
+      <ul class="paper-list">
+        <li>
+          <span>応用情報技術者試験 合格</span>
+          <span class="meta">2023年6月</span>
+        </li>
+      </ul>
+    </section>
+
+    <section id="contact" class="card">
+      <h2>Contact</h2>
+      <dl>
+        <dt>Email</dt><dd><a href="mailto:s25g360@kagawa-u.ac.jp">s25g360@kagawa-u.ac.jp</a></dd>
+        <dt>GitHub</dt><dd><a href="https://github.com/nagotta" target="_blank">github.com/nagotta</a></dd>
+      </dl>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    © 2026 Nagata Ayumu
+  </footer>
 
 </body>
 </html>
